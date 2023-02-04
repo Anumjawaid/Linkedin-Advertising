@@ -21,13 +21,14 @@ export const addUser=createAsyncThunk(
 )
 
 export const readUser=createAsyncThunk(
-    'user/addUser',
+    'user/readUser',
     async(data,thunkApi)=>{
         const requestOptions = {
-            method: 'GET',
+            method: 'POST',
             headers: { 'Content-Type': 'application/json' },
+            body:JSON.stringify(data)
         };
-        const res = await fetch('http://localhost:3002/user',requestOptions)
+        const res = await fetch('http://localhost:3002/userdata',requestOptions)
         // console.log(res,"response")
         return res.json();
     }
@@ -69,7 +70,7 @@ export const userSlice=createSlice({
         [readUser.fulfilled]:(state,action)=>{
             console.log(state,"fullfilled from in readUSER")
             // state.responses=action.payload.status
-            // state.data=action.payload.data
+            state.data=action.payload.result
             
         }
               
