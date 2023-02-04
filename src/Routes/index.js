@@ -12,7 +12,7 @@ export default function AppRouter() {
                     <Route path='/' element={<Signup />}></Route>
                 </Routes>
                 <Routes>
-                    <Route path='/dashboard' element={<Dashboard />}></Route>
+                    <Route path='/dashboard/:id' element={<Dashboard />}></Route>
                 </Routes>
             </Router>
 
