@@ -12,9 +12,10 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import Logo from '../UI/logo.gif'
 
 const pages = [];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Logout'];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState();
@@ -36,10 +37,11 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static" style={{background:'linear-gradient(30deg,#3B4371, #F3904F)'}}>
+    <AppBar position="static" style={{background:'linear-gradient(30deg,#0091E3,#373DEB)'}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
+          <img src={Logo}/>
           <Typography
             variant="h6"
             noWrap
@@ -55,7 +57,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -148,7 +150,7 @@ function ResponsiveAppBar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}  style={{background : 'linear-gradient(30deg, #F3904F,#3B4371)'}}>
+                <MenuItem key={setting} onClick={handleCloseUserMenu}  style={{background : 'linear-gradient(30deg, #0091E3,#373DEB)'}}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
