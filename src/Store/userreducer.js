@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState={
     isLoggedIn:null,
+    isInitiated:null,
    data:{
 
    }
@@ -58,8 +59,10 @@ export const userSlice=createSlice({
         displaySave:(state,action)=>{
             state.display=action.payload.display
         },
+        Initiate:(state,action)=>{
+            state.isInitiated=true
+        },
         logout:(state,action)=>{
-            document.cookie=''
             state.data={}
         }
        
@@ -73,10 +76,11 @@ export const userSlice=createSlice({
         [addUser.fulfilled]:(state,action)=>{
             state.responses=action.payload.status
             state.data=action.payload.data
+
             
         },
         [readUser.pending]: (state, action)=>{
-            console.log('pending');
+            // console.log('pending');
         },
         [readUser.rejected]:(state,action)=>{
             // state.responses=action.payload.message
@@ -87,7 +91,7 @@ export const userSlice=createSlice({
             
         },
         [logoutUser.pending]: (state, action)=>{
-            console.log('pending');
+            // console.log('pending');
         },
         [logoutUser.rejected]:(state,action)=>{
             // state.responses=action.payload.message
@@ -101,4 +105,4 @@ export const userSlice=createSlice({
     }
 })
 
-export const { add,displaySave,logout } = userSlice.actions
+export const { add,displaySave,Initiate,logout } = userSlice.actions

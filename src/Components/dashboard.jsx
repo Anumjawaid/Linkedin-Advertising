@@ -2,14 +2,18 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch, } from "react-redux"
 import { readUser } from "../Store/userreducer"
 import { Button } from "@mui/material"
-import { useSearchParams, useParams } from 'react-router-dom';
+import { useSearchParams, useParams, Navigate } from 'react-router-dom';
 import { Container, Typography } from '@mui/material';
 import ResponsiveAppBar from "./header";
 import PhaseChart from "./chart";
+import { useNavigate } from 'react-router';
 
 
 export default function Dashboard() {
+  let navigate=useNavigate()
   let data = useSelector((state) => state.users.data)
+  let initiate = useSelector((state) => state.users.isInitiated)
+  console.log(initiate,"ff")
   let dispatch = useDispatch()
   let { id } = useParams()
 
@@ -17,11 +21,18 @@ export default function Dashboard() {
     dispatch(readUser({ '_id': id }))
 
   }, [])
+  useEffect(() => {
+     if(data.length==0 ){
+      navigate('/')
+     }
+    
+     
+  }, [data])
 
   return (
     <>
       {
-        data != {} ?
+        data.length !=0 ?
 
           <div style={{ background: 'black', paddingBottom: '300px' }}>
             <ResponsiveAppBar />
