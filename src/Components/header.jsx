@@ -12,12 +12,18 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import { useNavigate } from 'react-router';
 import Logo from '../UI/logo.gif'
+import { useSelector, useDispatch, } from "react-redux"
+import {logout, logoutUser} from '../Store/userreducer'
 
 const pages = [];
 const settings = ['Logout'];
 
 function ResponsiveAppBar() {
+  let navigate=useNavigate()
+  let dispatch=useDispatch()
+  let data = useSelector((state) => state.users.data)
   const [anchorElNav, setAnchorElNav] = React.useState();
   const [anchorElUser, setAnchorElUser] = React.useState();
 
@@ -33,15 +39,19 @@ function ResponsiveAppBar() {
   };
 
   const handleCloseUserMenu = () => {
+
     setAnchorElUser(null);
+    dispatch(logout())
+    // dispatch(logoutUser())
+    navigate('/')
   };
 
   return (
     <AppBar position="static" style={{background:'linear-gradient(30deg,#0091E3,#373DEB)'}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
-          <img src={Logo}/>
+          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          {/* <img src={Logo}/> */}
           <Typography
             variant="h6"
             noWrap
@@ -57,7 +67,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            
+            Advertising Managment
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -130,7 +140,7 @@ function ResponsiveAppBar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 ,background:'red'}}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Remy Sharp" src={data.photo} />
               </IconButton>
             </Tooltip>
             <Menu

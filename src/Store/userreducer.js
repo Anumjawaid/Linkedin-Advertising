@@ -33,6 +33,20 @@ export const readUser=createAsyncThunk(
         return res.json();
     }
 )
+
+export const logoutUser=createAsyncThunk(
+    'user/logoutUser',
+    async(data,thunkApi)=>{
+        const requestOptions = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        };
+        const res = await fetch('http://localhost:3002/logout',requestOptions)
+        // console.log(res,"response")
+        return res.json();
+    }
+)
+
 export const userSlice=createSlice({
     name:'user',
     initialState,
@@ -44,18 +58,19 @@ export const userSlice=createSlice({
         displaySave:(state,action)=>{
             state.display=action.payload.display
         },
+        logout:(state,action)=>{
+            document.cookie=''
+            state.data={}
+        }
        
     },
     extraReducers:{
         [addUser.pending]: (state, action)=>{
-            console.log('pending');
         },
         [addUser.rejected]:(state,action)=>{
-            console.log(state,"Got rejected from pushing user in ADDUSER")
             // state.responses=action.payload.message
         },
         [addUser.fulfilled]:(state,action)=>{
-            console.log(state,"fullfilled from in ADDUSER")
             state.responses=action.payload.status
             state.data=action.payload.data
             
@@ -64,17 +79,26 @@ export const userSlice=createSlice({
             console.log('pending');
         },
         [readUser.rejected]:(state,action)=>{
-            console.log(state,"Got rejected from reading USER")
             // state.responses=action.payload.message
         },
         [readUser.fulfilled]:(state,action)=>{
-            console.log(state,"fullfilled from in readUSER")
             // state.responses=action.payload.status
             state.data=action.payload.result
+            
+        },
+        [logoutUser.pending]: (state, action)=>{
+            console.log('pending');
+        },
+        [logoutUser.rejected]:(state,action)=>{
+            // state.responses=action.payload.message
+        },
+        [logoutUser.fulfilled]:(state,action)=>{
+            // state.responses=action.payload.status
+            // state.data=action.payload.result
             
         }
               
     }
 })
 
-export const { add,displaySave } = userSlice.actions
+export const { add,displaySave,logout } = userSlice.actions

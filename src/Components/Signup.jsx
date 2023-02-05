@@ -11,7 +11,7 @@ export default function Signup() {
   let data = useSelector((state) => state.users.data)
   
   return (
-    <div style={{ background: 'black' }}>
+    <div style={{ background: 'black' ,paddingBottom:'300px'}}>
       <Container style={{ background: 'black',alignItems:'center',textAlign:'center',textShadow:'1px',marginTop:'8px' }}>
       <br/><br/>
         <Typography variant="h5" component="h5" style={{ color:'#0091E3',marginTop:'8px' }}>
