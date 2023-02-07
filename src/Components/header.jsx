@@ -41,7 +41,7 @@ function ResponsiveAppBar() {
   const handleCloseUserMenu = () => {
 
     setAnchorElUser(null);
-    dispatch(logout())
+    dispatch(logoutUser({'_id':data._id}))
     // dispatch(logoutUser())
     navigate('/')
   };

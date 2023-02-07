@@ -36,11 +36,12 @@ export const readUser=createAsyncThunk(
 )
 
 export const logoutUser=createAsyncThunk(
-    'user/logoutUser',
+    'user/logout',
     async(data,thunkApi)=>{
         const requestOptions = {
-            method: 'GET',
+            method: 'POST',
             headers: { 'Content-Type': 'application/json' },
+            body:JSON.stringify(data)
         };
         const res = await fetch('http://localhost:3002/logout',requestOptions)
         // console.log(res,"response")
@@ -98,7 +99,7 @@ export const userSlice=createSlice({
         },
         [logoutUser.fulfilled]:(state,action)=>{
             // state.responses=action.payload.status
-            // state.data=action.payload.result
+            state.data=action.payload.result
             
         }
               

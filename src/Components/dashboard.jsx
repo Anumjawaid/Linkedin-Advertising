@@ -12,22 +12,27 @@ import { useNavigate } from 'react-router';
 export default function Dashboard() {
   let navigate=useNavigate()
   let data = useSelector((state) => state.users.data)
-  let initiate = useSelector((state) => state.users.isInitiated)
-  console.log(initiate,"ff")
+  console.log(data,"data")
   let dispatch = useDispatch()
   let { id } = useParams()
 
   useEffect(() => {
+    if(data.length==0 ){
+     navigate('/')
+    }
+   
+    
+ }, [data])
+  useEffect(() => {
+    if(id!=null){
     dispatch(readUser({ '_id': id }))
+    }
+    else{
+      navigate('/')
+    }
 
   }, [])
-  useEffect(() => {
-     if(data.length==0 ){
-      navigate('/')
-     }
-    
-     
-  }, [data])
+  
 
   return (
     <>
@@ -62,7 +67,7 @@ export default function Dashboard() {
               </Typography>
               <br /><br />
            
-              <img src={data.photo} style={{ radius: '50px' }} />
+              {/* <img src={data.photo} style={{ radius: '50px' }} /> */}
 
               <br /><br /><br />
             </Container>
